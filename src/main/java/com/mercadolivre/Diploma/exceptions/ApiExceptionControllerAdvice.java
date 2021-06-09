@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ApiExceptionControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> validationError(MethodArgumentNotValidException e, HttpServletRequest request) {
-        ValidationError standardError = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
+        ValidationError standardError = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação",
+                                                            System.currentTimeMillis());
 
         for (FieldError x : e.getBindingResult().getFieldErrors()) {
             standardError.addError(x.getField(), x.getDefaultMessage());
